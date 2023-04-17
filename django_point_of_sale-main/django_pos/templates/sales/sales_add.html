@@ -118,7 +118,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Amount payed</label>
+                                    <label>Amount paid</label>
                                     <div class="input-group">
                                         <input name="amount_payed" class="form-control" required>
                                     </div>
@@ -484,7 +484,7 @@
             };
             
             // Only allow to send if the payed amount is equal or greater than the total
-            if ($('[name="amount_payed"]').val() <= $('[name="grand_total"]').val()) {
+            if ($('[name="amount_payed"]').val() < $('[name="grand_total"]').val()) {
                 Swal.fire({
                     title: 'Payable Amount is lower that the Grand Total',
                     icon: 'warning',
