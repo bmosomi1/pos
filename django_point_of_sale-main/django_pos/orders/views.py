@@ -23,6 +23,59 @@ def SalesListView(request):
         "sales": Sale.objects.all()
     }
     return render(request, "sales/sales.html", context=context)
+@login_required(login_url="/accounts/login/")
+def OrderAddView(request):
+    context = {
+        "active_icon": "sales",
+        "customers": [c.to_select2() for c in Customer.objects.all()]
+    }
+
+    if request.method == 'POST':
+        if is_ajax(request=request):
+            # Save the POST arguements
+            data = json.load(request)
+
+            order_attributes = {
+                "customer": Customer.objects.get(id=int(data['customer'])),
+                "sub_total": float(data["sub_total"]),
+                "grand_total": float(data["grand_total"]),
+                "tax_amount": float(data["tax_amount"]),
+                "tax_percentage": float(data["tax_percentage"]),
+                "amount_payed": float(data["amount_payed"]),
+                "amount_change": float(data["amount_change"]),
+            }
+            try:
+                # Create the sale
+                new_order = Order.objects.create(**order_attributes)
+                new_order.save()
+                # Create the sale details
+                products = data["products"]
+
+                for product in products:
+                    detail_attributes = {
+                        "sale": Sale.objects.get(id=new_sale.id),
+                        "product": Product.objects.get(id=int(product["id"])),
+                        "price": product["price"],
+                        "quantity": product["quantity"],
+                        "total_detail": product["total_product"]
+                    }
+                    order_detail_new = OrderDetail.objects.create(
+                        **detail_attributes)
+                    order_detail_new.save()
+
+                print("Order saved")
+
+                messages.success(
+                    request, 'Order created succesfully!', extra_tags="success")
+
+            except Exception as e:
+                messages.success(
+                    request, 'There was an error during the creation!', extra_tags="danger")
+
+        return redirect('orders:sales_list')
+
+    return render(request, "orders/order_add.html", context=context)
+
 
 
 @login_required(login_url="/accounts/login/")

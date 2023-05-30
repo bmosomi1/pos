@@ -7,7 +7,7 @@ urlpatterns = [
     # List sales
     path('', views.SalesListView, name='sales_list'),
     # Add sale
-    path('add', views.SalesAddView, name='sales_add'),
+    path('add', views.OrdersAddView, name='orders_add'),
     # Details sale
     path('details/<str:sale_id>',
          views.SalesDetailsView, name='sales_details'),
