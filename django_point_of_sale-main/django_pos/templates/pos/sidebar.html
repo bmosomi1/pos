@@ -39,12 +39,12 @@
     </li>
 
     <li class="{% if "products" in active_icon %} nav-item active {% else %} nav-item {% endif %}">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
             aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-tag"></i>
             <span>Orders</span>
         </a>
-        <div id="collapseTwo" class="{% if "products" in active_icon %} collapse show {% else %} collapse {% endif %}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapseThree" class="{% if "products" in active_icon %} collapse show {% else %} collapse {% endif %}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="{% if "categories" in active_icon %} collapse-item active {% else %} collapse-item {% endif %}" href="{% url 'products:categories_list' %}">All Orders</a>
                 <a class="{% if "categories" in active_icon %} collapse-item active {% else %} collapse-item {% endif %}" href="{% url 'products:categories_list' %}">Pending Orders</a>
@@ -54,12 +54,12 @@
     </li>
 
     <li class="{% if "products" in active_icon %} nav-item active {% else %} nav-item {% endif %}">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
             aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-tag"></i>
             <span>Payments</span>
         </a>
-        <div id="collapseTwo" class="{% if "products" in active_icon %} collapse show {% else %} collapse {% endif %}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapseFour" class="{% if "products" in active_icon %} collapse show {% else %} collapse {% endif %}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="{% if "categories" in active_icon %} collapse-item active {% else %} collapse-item {% endif %}" href="{% url 'products:categories_list' %}">All Payments</a>
                 <a class="{% if "categories" in active_icon %} collapse-item active {% else %} collapse-item {% endif %}" href="{% url 'products:categories_list' %}">Unallocated Payments</a>
