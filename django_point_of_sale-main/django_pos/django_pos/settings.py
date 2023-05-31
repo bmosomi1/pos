@@ -43,8 +43,6 @@ LOCAL_APPS = [
     "customers",
     "pos",
     "products",
-    "orders",
-    "payments",
     "sales",
 ]
 
