@@ -28,21 +28,6 @@ class Order(models.Model):
         return sum([d.quantity for d in details])
 
 
-class SaleDetail(models.Model):
-    sale = models.ForeignKey(
-        Sale, models.DO_NOTHING, db_column='sale')
-    product = models.ForeignKey(
-        Product, models.DO_NOTHING, db_column='product')
-    price = models.FloatField()
-    quantity = models.IntegerField()
-    total_detail = models.FloatField()
-
-    class Meta:
-        db_table = 'SaleDetails'
-
-    def __str__(self) -> str:
-        return "Detail ID: " + str(self.id) + " Sale ID: " + str(self.sale.id) + " Quantity: " + str(self.quantity)
-
 
 class OrderDetail(models.Model):
     sale = models.ForeignKey(
