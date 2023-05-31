@@ -74,7 +74,7 @@ def add_orders(request):
 
         return redirect('sales:sales_list')
 
-    return render(request, "sales/order_add.html", context=context)
+    return render(request, "products/order_add.html", context=context)
 
 
 
