@@ -46,6 +46,9 @@ class Order(models.Model):
     def __str__(self) -> str:
         return self.name
 
+
+
+
 class Product(models.Model):
     STATUS_CHOICES = (  # new
         ("ACTIVE", "Active"),
@@ -79,3 +82,20 @@ class Product(models.Model):
         item['quantity'] = 1
         item['total_product'] = 0
         return item
+
+
+
+class OrderDetail(models.Model):
+    order = models.ForeignKey(
+        Order, models.DO_NOTHING, db_column='sale')
+    product = models.ForeignKey(
+        Product, models.DO_NOTHING, db_column='product')
+    price = models.FloatField()
+    quantity = models.IntegerField()
+    total_detail = models.FloatField()
+
+    class Meta:
+        db_table = 'OrderDetails'
+
+    def __str__(self) -> str:
+        return "Detail ID: " + str(self.id) + " Order ID: " + str(self.order.id) + " Quantity: " + str(self.quantity)
