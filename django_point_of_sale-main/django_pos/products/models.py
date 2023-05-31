@@ -24,6 +24,27 @@ class Category(models.Model):
     def __str__(self) -> str:
         return self.name
 
+class Order(models.Model):
+    STATUS_CHOICES = (  # new
+        ("ACTIVE", "Active"),
+        ("INACTIVE", "Inactive")
+    )
+
+    name = models.CharField(max_length=256)
+    description = models.TextField(max_length=256)
+    status = models.CharField(
+        choices=STATUS_CHOICES,
+        max_length=100,
+        verbose_name="Status of the order",
+    )
+
+    class Meta:
+        # Table's name
+        db_table = "order"
+        verbose_name_plural = "orders"
+
+    def __str__(self) -> str:
+        return self.name
 
 class Product(models.Model):
     STATUS_CHOICES = (  # new

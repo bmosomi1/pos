@@ -6,6 +6,8 @@ app_name = "products"
 urlpatterns = [
     # List categories
     path('categories', views.CategoriesListView, name='categories_list'),
+     # List Orders
+    path('all/orders', views.all_orders, name='all_orders'),
     # Add category
     path('categories/add', views.CategoriesAddView, name='categories_add'),
     # Update category

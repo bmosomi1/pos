@@ -8,6 +8,8 @@ urlpatterns = [
     path('', include('authentication.urls')),
     # Index
     path('', include('pos.urls')),
+    
+    
     # Products
     path('products/', include('products.urls')),
     # Customers

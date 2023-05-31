@@ -12,6 +12,13 @@ def CategoriesListView(request):
         "categories": Category.objects.all()
     }
     return render(request, "products/categories.html", context=context)
+@login_required(login_url="/accounts/login/")
+def all_orders(request):
+    context = {
+        "active_icon": "products_categories",
+        "orders": Order.objects.all()
+    }
+    return render(request, "products/orders.html", context=context)
 
 
 @login_required(login_url="/accounts/login/")
