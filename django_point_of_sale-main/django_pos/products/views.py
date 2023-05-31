@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from .models import Category, Product, Order
+from customers.models import Customer
 
 
 @login_required(login_url="/accounts/login/")
@@ -19,6 +20,63 @@ def all_orders(request):
         "orders": Order.objects.all()
     }
     return render(request, "products/orders.html", context=context)
+
+
+
+@login_required(login_url="/accounts/login/")
+def add_orders(request):
+    context = {
+        "active_icon": "sales",
+        "customers": [c.to_select2() for c in Customer.objects.all()]
+    }
+
+    if request.method == 'POST':
+        if is_ajax(request=request):
+            # Save the POST arguements
+            data = json.load(request)
+
+            sale_attributes = {
+                "customer": Customer.objects.get(id=int(data['customer'])),
+                "sub_total": float(data["sub_total"]),
+                "grand_total": float(data["grand_total"]),
+                "tax_amount": float(data["tax_amount"]),
+                "tax_percentage": float(data["tax_percentage"]),
+                "amount_payed": float(data["amount_payed"]),
+                "amount_change": float(data["amount_change"]),
+            }
+            try:
+                # Create the sale
+                new_order = Order.objects.create(**sale_attributes)
+                new_order.save()
+                # Create the sale details
+                products = data["products"]
+
+                for product in products:
+                    detail_attributes = {
+                        "sale": Order.objects.get(id=new_order.id),
+                        "product": Product.objects.get(id=int(product["id"])),
+                        "price": product["price"],
+                        "quantity": product["quantity"],
+                        "total_detail": product["total_product"]
+                    }
+                    sale_detail_new = SaleDetail.objects.create(
+                        **detail_attributes)
+                    sale_detail_new.save()
+
+                print("Sale saved")
+
+                messages.success(
+                    request, 'Sale created succesfully!', extra_tags="success")
+
+            except Exception as e:
+                messages.success(
+                    request, 'There was an error during the creation!', extra_tags="danger")
+
+        return redirect('sales:sales_list')
+
+    return render(request, "sales/order_add.html", context=context)
+
+
 
 
 @login_required(login_url="/accounts/login/")

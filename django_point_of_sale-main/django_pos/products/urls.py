@@ -8,6 +8,7 @@ urlpatterns = [
     path('categories', views.CategoriesListView, name='categories_list'),
      # List Orders
     path('all/orders', views.all_orders, name='all_orders'),
+    path('add/orders', views.add_orders, name='add_orders'),
     # Add category
     path('categories/add', views.CategoriesAddView, name='categories_add'),
     # Update category
