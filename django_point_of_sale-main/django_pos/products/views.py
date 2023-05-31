@@ -59,14 +59,14 @@ def add_orders(request):
                         "quantity": product["quantity"],
                         "total_detail": product["total_product"]
                     }
-                    sale_detail_new = SaleDetail.objects.create(
+                    order_detail_new = OrderDetail.objects.create(
                         **detail_attributes)
-                    sale_detail_new.save()
+                    order_detail_new.save()
 
-                print("Sale saved")
+                print("Order saved")
 
                 messages.success(
-                    request, 'Sale created succesfully!', extra_tags="success")
+                    request, 'Order created succesfully!', extra_tags="success")
 
             except Exception as e:
                 messages.success(
