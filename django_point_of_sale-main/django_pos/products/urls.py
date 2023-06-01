@@ -20,6 +20,7 @@ urlpatterns = [
 
     # List products
     path('', views.ProductsListView, name='products_list'),
+    path('', views.orders_list, name='orders_list'),
     # Add product
     path('add', views.ProductsAddView, name='products_add'),
     # Update product

@@ -26,7 +26,7 @@ def all_orders(request):
 @login_required(login_url="/accounts/login/")
 def add_orders(request):
     context = {
-        "active_icon": "sales",
+        "active_icon": "orders",
         "customers": [c.to_select2() for c in Customer.objects.all()]
     }
 
@@ -72,7 +72,7 @@ def add_orders(request):
                 messages.success(
                     request, 'There was an error during the creation!', extra_tags="danger")
 
-        return redirect('sales:sales_list')
+        return redirect('products:orders_list')
 
     return render(request, "products/order_add.html", context=context)
 
@@ -206,6 +206,14 @@ def ProductsListView(request):
         "products": Product.objects.all()
     }
     return render(request, "products/products.html", context=context)
+
+@login_required(login_url="/accounts/login/")
+def orders_list(request):
+    context = {
+        "active_icon": "orders",
+        "orders": Order.objects.all()
+    }
+    return render(request, "products/orders.html", context=context)
 
 
 @login_required(login_url="/accounts/login/")
