@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['jpos.roberms.com','167.235.239.71']
 
-
+#content merged
 # Application definition
 
 DJANGO_APPS = [
