@@ -35,7 +35,7 @@ def add_orders(request):
             # Save the POST arguements
             data = json.load(request)
 
-            sale_attributes = {
+            order_attributes = {
                 "customer": Customer.objects.get(id=int(data['customer'])),
                 "sub_total": float(data["sub_total"]),
                 "grand_total": float(data["grand_total"]),
@@ -46,7 +46,7 @@ def add_orders(request):
             }
             try:
                 # Create the sale
-                new_order = Order.objects.create(**sale_attributes)
+                new_order = Order.objects.create(**order_attributes)
                 new_order.save()
                 # Create the sale details
                 products = data["products"]
